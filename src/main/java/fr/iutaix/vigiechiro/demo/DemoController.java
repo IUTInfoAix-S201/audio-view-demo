@@ -8,21 +8,23 @@ import javafx.stage.FileChooser;
 
 /**
  * Contrôleur de la démonstration. Il câble le bouton d'ouverture de fichier et observe les
- * propriétés publiques d'{@link AudioView} pour mettre à jour l'affichage du temps : c'est tout ce
- * qu'un consommateur a besoin de connaître du composant (le reste est une boîte noire).
+ * propriétés publiques d'{@link AudioView} pour alimenter la barre d'état : c'est tout ce qu'un
+ * consommateur a besoin de connaître du composant (le reste est une boîte noire).
  */
 public class DemoController {
 
   @FXML private AudioView audioView;
   @FXML private Label fichierLabel;
-  @FXML private Label tempsLabel;
+  @FXML private Label etatLabel;
 
   @FXML
   private void initialize() {
-    // Démonstration de l'API observable : on réagit aux propriétés exposées par le composant.
-    audioView.currentTimeProperty().addListener((obs, ancien, nouveau) -> majTemps());
-    audioView.durationProperty().addListener((obs, ancien, nouveau) -> majTemps());
-    majTemps();
+    // Démonstration de l'API observable : la barre d'état reflète les propriétés du composant.
+    audioView.currentTimeProperty().addListener((obs, ancien, nouveau) -> majEtat());
+    audioView.durationProperty().addListener((obs, ancien, nouveau) -> majEtat());
+    audioView.playingProperty().addListener((obs, ancien, nouveau) -> majEtat());
+    audioView.audioFileProperty().addListener((obs, ancien, nouveau) -> majEtat());
+    majEtat();
   }
 
   @FXML
@@ -39,8 +41,14 @@ public class DemoController {
     }
   }
 
-  private void majTemps() {
-    tempsLabel.setText(
-        String.format("%.2f / %.2f s", audioView.getCurrentTime(), audioView.getDuration()));
+  private void majEtat() {
+    if (audioView.getAudioFile() == null) {
+      etatLabel.setText("Aucun fichier chargé");
+      return;
+    }
+    String lecture = audioView.isPlaying() ? "Lecture en cours" : "En pause";
+    etatLabel.setText(
+        String.format(
+            "%s - %.2f / %.2f s", lecture, audioView.getCurrentTime(), audioView.getDuration()));
   }
 }

@@ -22,12 +22,23 @@
       </padding>
       <Button text="Ouvrir un fichier WAV..." onAction="#ouvrir"/>
       <Label fx:id="fichierLabel" text="(aucun fichier ouvert)"/>
-      <Label fx:id="tempsLabel"/>
     </HBox>
   </top>
 
   <center>
     <AudioView fx:id="audioView"/>
   </center>
+
+  <!-- Barre d'etat : l'etat de lecture observe via l'API du composant
+       (playingProperty / currentTimeProperty / durationProperty). -->
+  <bottom>
+    <HBox alignment="CENTER_LEFT"
+          style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-width: 1 0 0 0;">
+      <padding>
+        <Insets top="6" right="12" bottom="6" left="12"/>
+      </padding>
+      <Label fx:id="etatLabel" text="Aucun fichier chargé"/>
+    </HBox>
+  </bottom>
 
 </BorderPane>
