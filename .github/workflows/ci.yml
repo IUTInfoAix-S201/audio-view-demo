@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      # JDK Zulu 25 avec JavaFX embarqué : la démo consomme JavaFX en compile (sans
+      # classifier) et se lance via javafx-maven-plugin ; un JDK fx suffit (pas de matrice,
+      # ce n'est pas une bibliothèque portable comme audio-view).
+      - name: Configurer JDK 25 avec JavaFX (Zulu)
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'zulu'
+          java-package: 'jdk+fx'
+          cache: maven
+
+      # Compile la démo contre audio-view (JitPack) + qualité (PMD strict, SpotBugs,
+      # enforcer). Headless via serveur X virtuel.
+      - name: Build et qualité (headless)
+        run: xvfb-run -a ./mvnw -B -Pquality-gate verify
