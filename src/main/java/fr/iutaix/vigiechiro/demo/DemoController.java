@@ -4,6 +4,9 @@ import fr.iutaix.vigiechiro.audio.AudioView;
 import java.io.File;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 
 /**
@@ -36,9 +39,34 @@ public class DemoController {
         .add(new FileChooser.ExtensionFilter("Fichiers WAV", "*.wav", "*.WAV"));
     File fichier = chooser.showOpenDialog(audioView.getScene().getWindow());
     if (fichier != null) {
-      audioView.setAudioFile(fichier.toPath());
-      fichierLabel.setText(fichier.getName());
+      charger(fichier);
     }
+  }
+
+  // Glisser-deposer : alternative robuste au dialogue natif (aucun dialogue GTK,
+  // donc immunise contre le gel intermittent du FileChooser sous Wayland).
+  @FXML
+  private void surGlisser(DragEvent e) {
+    if (e.getDragboard().hasFiles()) {
+      e.acceptTransferModes(TransferMode.COPY);
+    }
+    e.consume();
+  }
+
+  @FXML
+  private void surDepot(DragEvent e) {
+    Dragboard presse = e.getDragboard();
+    boolean ok = presse.hasFiles() && !presse.getFiles().isEmpty();
+    if (ok) {
+      charger(presse.getFiles().get(0));
+    }
+    e.setDropCompleted(ok);
+    e.consume();
+  }
+
+  private void charger(File fichier) {
+    audioView.setAudioFile(fichier.toPath());
+    fichierLabel.setText(fichier.getName());
   }
 
   private void majEtat() {

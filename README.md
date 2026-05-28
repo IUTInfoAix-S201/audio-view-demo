@@ -13,18 +13,22 @@ lecture audio restent internes au composant (boîte noire).
 mvn javafx:run
 ```
 
-Au premier lancement, Maven télécharge `audio-view` depuis JitPack. Cliquez sur **« Ouvrir un
-fichier WAV... »** pour charger une séquence : le sonogramme et le spectrogramme s'affichent, la
-barre d'outils du composant permet la lecture et les zooms temps / fréquence.
+Au premier lancement, Maven télécharge `audio-view` depuis JitPack. Pour charger une séquence :
+
+- **glissez‑déposez un fichier WAV sur la fenêtre** (voie recommandée), ou
+- cliquez sur **« Ouvrir un fichier WAV... »**.
+
+Le sonogramme et le spectrogramme s'affichent, la barre d'outils du composant permet la lecture et
+les zooms temps / fréquence.
 
 > Sans écran (Linux headless, CI), lancez derrière un serveur X virtuel :
 > `xvfb-run -a mvn javafx:run`.
 
-> **Linux — le dialogue « Ouvrir » se fige ?** Si le sélecteur de fichiers se bloque (on ne peut
-> plus que l'annuler), c'est le « grab » d'entrée de JavaFX qui se coince selon le gestionnaire de
-> fenêtres (symptôme intermittent). La démo lance déjà la JVM avec `-Dglass.disableGrab=true`
-> (voir le `javafx-maven-plugin` dans `pom.xml`) pour l'éviter. Si le souci persiste sur une session
-> Wayland, essayez en plus `GTK_USE_PORTAL=0 mvn javafx:run`.
+> **Linux / Wayland — le bouton « Ouvrir » se fige ?** Le dialogue natif GTK du `FileChooser` gèle
+> par intermittence (et le JVM reste coincé, bloquant les lancements suivants). C'est un souci connu
+> de JavaFX sur Linux, indépendant du composant. Le **glisser‑déposer ci‑dessus n'utilise aucun
+> dialogue GTK** : c'est le moyen fiable de charger un fichier. Si un lancement reste bloqué, tuez le
+> JVM resté coincé : `pkill -9 -f 'fr.iutaix.vigiechiro.demo'`.
 
 ## Comment l'intégration fonctionne
 

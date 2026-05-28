@@ -13,6 +13,7 @@
 -->
 <BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="fr.iutaix.vigiechiro.demo.DemoController"
+            onDragOver="#surGlisser" onDragDropped="#surDepot"
             prefWidth="900" prefHeight="600">
 
   <top>
@@ -21,7 +22,7 @@
         <Insets top="10" right="12" bottom="10" left="12"/>
       </padding>
       <Button text="Ouvrir un fichier WAV..." onAction="#ouvrir"/>
-      <Label fx:id="fichierLabel" text="(aucun fichier ouvert)"/>
+      <Label fx:id="fichierLabel" text="(ouvrez un WAV, ou glissez-le sur la fenêtre)"/>
     </HBox>
   </top>
 
