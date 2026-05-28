@@ -92,6 +92,11 @@
           <mainClass>fr.iutaix.vigiechiro.demo/fr.iutaix.vigiechiro.demo.DemoApp</mainClass>
           <options>
             <option>--enable-native-access=javafx.graphics</option>
+            <!-- Linux : evite que le "grab" d'entree de JavaFX se coince et gele
+                 le dialogue natif du FileChooser (popup/dialogue qu'on ne peut
+                 plus qu'annuler). Symptome intermittent, dependant du gestionnaire
+                 de fenetres. -->
+            <option>-Dglass.disableGrab=true</option>
           </options>
         </configuration>
       </plugin>
