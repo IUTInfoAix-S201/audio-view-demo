@@ -22,6 +22,10 @@ public class DemoController {
 
   @FXML
   private void initialize() {
+    // Les WAV VigieChiro sont ralentis x10 : on demande au composant d'afficher les unites reelles
+    // (frequence x10, temps /10) sur ses axes.
+    audioView.setTimeExpansionFactor(10);
+
     // Démonstration de l'API observable : la barre d'état reflète les propriétés du composant.
     audioView.currentTimeProperty().addListener((obs, ancien, nouveau) -> majEtat());
     audioView.durationProperty().addListener((obs, ancien, nouveau) -> majEtat());
@@ -74,9 +78,11 @@ public class DemoController {
       etatLabel.setText("Aucun fichier chargé");
       return;
     }
+    double f = audioView.getTimeExpansionFactor();
     String lecture = audioView.isPlaying() ? "Lecture en cours" : "En pause";
     etatLabel.setText(
         String.format(
-            "%s - %.2f / %.2f s", lecture, audioView.getCurrentTime(), audioView.getDuration()));
+            "%s - %.2f / %.2f s",
+            lecture, audioView.getCurrentTime() / f, audioView.getDuration() / f));
   }
 }
