@@ -1,6 +1,6 @@
-package fr.iutaix.vigiechiro.demo;
+package fr.nedjar.vigiechiro.demo;
 
-import fr.iutaix.vigiechiro.audio.AudioView;
+import fr.nedjar.vigiechiro.audio.AudioView;
 import java.io.File;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

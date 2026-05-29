@@ -1,4 +1,4 @@
-package fr.iutaix.vigiechiro.demo;
+package fr.nedjar.vigiechiro.demo;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -29,16 +29,16 @@ entre thème sombre et clair (démonstration de l'API `setLightTheme`).
 > par intermittence (et le JVM reste coincé, bloquant les lancements suivants). C'est un souci connu
 > de JavaFX sur Linux, indépendant du composant. Le **glisser‑déposer ci‑dessus n'utilise aucun
 > dialogue GTK** : c'est le moyen fiable de charger un fichier. Si un lancement reste bloqué, tuez le
-> JVM resté coincé : `pkill -9 -f 'fr.iutaix.vigiechiro.demo'`.
+> JVM resté coincé : `pkill -9 -f 'fr.nedjar.vigiechiro.demo'`.
 
 ## Comment l'intégration fonctionne
 
-- **Dépendance** (`pom.xml`) : dépôt `jitpack.io` + `com.github.IUTInfoAix-S201:audio-view:v1.2.0`
+- **Dépendance** (`pom.xml`) : dépôt `jitpack.io` + `com.github.IUTInfoAix-S201:audio-view:v1.3.0`
   (propriété `audio.view.version`). Le `groupId` est imposé par JitPack (`com.github.<organisation>`),
   l'`artifactId` est le nom du dépôt. Le composant étant en FXML, la démo apporte aussi le module
   `javafx-fxml`.
 - **Insertion FXML** (`DemoView.fxml`) : `<AudioView fx:id="audioView"/>` après l'import
-  `<?import fr.iutaix.vigiechiro.audio.AudioView?>`.
+  `<?import fr.nedjar.vigiechiro.audio.AudioView?>`.
 - **Câblage** (`DemoController.java`) : `audioView.setAudioFile(...)` pour la source, écoute de
   `currentTimeProperty()` / `durationProperty()` pour se synchroniser, et `setLightTheme(...)` pour le
   bouton de thème.
