@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
 <!--
   Le composant AudioView s'insère directement en FXML (constructeur sans argument).
@@ -23,6 +24,8 @@
       </padding>
       <Button text="Ouvrir un fichier WAV..." onAction="#ouvrir"/>
       <Label fx:id="fichierLabel" text="(ouvrez un WAV, ou glissez-le sur la fenêtre)"/>
+      <Region HBox.hgrow="ALWAYS"/>
+      <Button fx:id="themeBouton" text="Thème clair" onAction="#basculerTheme"/>
     </HBox>
   </top>
 

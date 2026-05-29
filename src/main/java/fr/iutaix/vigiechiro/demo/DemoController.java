@@ -3,6 +3,7 @@ package fr.iutaix.vigiechiro.demo;
 import fr.iutaix.vigiechiro.audio.AudioView;
 import java.io.File;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -19,6 +20,7 @@ public class DemoController {
   @FXML private AudioView audioView;
   @FXML private Label fichierLabel;
   @FXML private Label etatLabel;
+  @FXML private Button themeBouton;
 
   @FXML
   private void initialize() {
@@ -32,6 +34,13 @@ public class DemoController {
     audioView.playingProperty().addListener((obs, ancien, nouveau) -> majEtat());
     audioView.audioFileProperty().addListener((obs, ancien, nouveau) -> majEtat());
     majEtat();
+  }
+
+  @FXML
+  private void basculerTheme() {
+    boolean clair = !audioView.isLightTheme();
+    audioView.setLightTheme(clair);
+    themeBouton.setText(clair ? "Thème sombre" : "Thème clair");
   }
 
   @FXML
