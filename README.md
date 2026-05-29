@@ -19,7 +19,8 @@ Au premier lancement, Maven télécharge `audio-view` depuis JitPack. Pour charg
 - cliquez sur **« Ouvrir un fichier WAV... »**.
 
 Le sonogramme et le spectrogramme s'affichent, la barre d'outils du composant permet la lecture et
-les zooms temps / fréquence.
+les zooms temps / fréquence. Le bouton **« Thème clair »** (en haut à droite) bascule le composant
+entre thème sombre et clair (démonstration de l'API `setLightTheme`).
 
 > Sans écran (Linux headless, CI), lancez derrière un serveur X virtuel :
 > `xvfb-run -a mvn javafx:run`.
@@ -32,13 +33,15 @@ les zooms temps / fréquence.
 
 ## Comment l'intégration fonctionne
 
-- **Dépendance** (`pom.xml`) : dépôt `jitpack.io` + `com.github.IUTInfoAix-S201:audio-view:v1.0.0`.
-  Le `groupId` est imposé par JitPack (`com.github.<organisation>`), l'`artifactId` est le nom du
-  dépôt.
+- **Dépendance** (`pom.xml`) : dépôt `jitpack.io` + `com.github.IUTInfoAix-S201:audio-view:v1.2.0`
+  (propriété `audio.view.version`). Le `groupId` est imposé par JitPack (`com.github.<organisation>`),
+  l'`artifactId` est le nom du dépôt. Le composant étant en FXML, la démo apporte aussi le module
+  `javafx-fxml`.
 - **Insertion FXML** (`DemoView.fxml`) : `<AudioView fx:id="audioView"/>` après l'import
   `<?import fr.iutaix.vigiechiro.audio.AudioView?>`.
-- **Câblage** (`DemoController.java`) : `audioView.setAudioFile(...)` pour la source, et écoute de
-  `currentTimeProperty()` / `durationProperty()` pour se synchroniser avec le reste de l'IHM.
+- **Câblage** (`DemoController.java`) : `audioView.setAudioFile(...)` pour la source, écoute de
+  `currentTimeProperty()` / `durationProperty()` pour se synchroniser, et `setLightTheme(...)` pour le
+  bouton de thème.
 
 ## Pile technique
 
