@@ -231,5 +231,34 @@
         </plugins>
       </build>
     </profile>
+
+    <!-- Capture : régénère l'aperçu du README d'audio-view par rendu hors-écran de l'AudioView.
+         Voir scripts/capture-apercu.sh. Usage direct :
+           xvfb-run -a mvn -Pcapture javafx:run -Dcapture.wav=<WAV> -Dcapture.out=<sortie.png> -->
+    <profile>
+      <id>capture</id>
+      <properties>
+        <capture.wav/>
+        <capture.out>apercu.png</capture.out>
+        <capture.freqZoom>5</capture.freqZoom>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-maven-plugin</artifactId>
+            <configuration>
+              <mainClass>fr.nedjar.vigiechiro.demo/fr.nedjar.vigiechiro.demo.CaptureApercu</mainClass>
+              <options combine.self="override">
+                <option>--enable-native-access=javafx.graphics</option>
+                <option>-Dcapture.wav=${capture.wav}</option>
+                <option>-Dcapture.out=${capture.out}</option>
+                <option>-Dcapture.freqZoom=${capture.freqZoom}</option>
+              </options>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
