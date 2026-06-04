@@ -2,8 +2,10 @@ package fr.nedjar.vigiechiro.demo;
 
 import fr.nedjar.vigiechiro.audio.AudioView;
 import java.io.File;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -21,6 +23,10 @@ public class DemoController {
   @FXML private Label fichierLabel;
   @FXML private Label etatLabel;
   @FXML private Button themeBouton;
+  @FXML private CheckBox normaliserCase;
+  @FXML private CheckBox boucleCase;
+  @FXML private CheckBox daltonienCase;
+  @FXML private Label gainLabel;
 
   @FXML
   private void initialize() {
@@ -33,6 +39,28 @@ public class DemoController {
     audioView.durationProperty().addListener((obs, ancien, nouveau) -> majEtat());
     audioView.playingProperty().addListener((obs, ancien, nouveau) -> majEtat());
     audioView.audioFileProperty().addListener((obs, ancien, nouveau) -> majEtat());
+
+    // Préférences observables d'AudioView exposées en cases à cocher : liaison bidirectionnelle
+    // (selectedProperty <-> BooleanProperty du composant). Illustre l'API publique récente :
+    // normalisation peak du volume à la lecture (#32), lecture en boucle, palette
+    // daltonien-friendly.
+    normaliserCase.selectedProperty().bindBidirectional(audioView.normalisationProperty());
+    boucleCase.selectedProperty().bindBidirectional(audioView.loopProperty());
+    daltonienCase.selectedProperty().bindBidirectional(audioView.colorblindFriendlyProperty());
+
+    // Retour visuel de la normalisation peak : affiche le gain réellement appliqué (en dB), sinon
+    // rien. La normalisation agit sur l'audio (audible), pas sur les tracés.
+    gainLabel
+        .textProperty()
+        .bind(
+            Bindings.createStringBinding(
+                () ->
+                    audioView.isNormalisation()
+                        ? String.format("Normalisé : %+.1f dB", audioView.getNormalisationGainDb())
+                        : "",
+                audioView.normalisationProperty(),
+                audioView.normalisationGainDbProperty()));
+
     majEtat();
   }
 
