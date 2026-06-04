@@ -17,7 +17,10 @@
     <maven.compiler.release>25</maven.compiler.release>
 
     <javafx.version>25</javafx.version>
-    <audio.view.version>1.10.1</audio.view.version>
+    <!-- audio-view sur Maven Central (groupId fr.nedjar.vigiechiro). 1.12.0 : normalisation peak
+         à la lecture (#32), lecture en boucle + mode daltonien assorti au thème, et mode sombre
+         par défaut en inferno (#34). -->
+    <audio.view.version>1.12.0</audio.view.version>
 
     <maven.compiler.plugin.version>3.15.0</maven.compiler.plugin.version>
     <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
