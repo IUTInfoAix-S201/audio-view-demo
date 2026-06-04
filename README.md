@@ -36,8 +36,7 @@ entre thème sombre et clair (démonstration de l'API `setLightTheme`).
 
 - **Dépendance** (`pom.xml`) : `fr.nedjar.vigiechiro:audio-view:1.10.1` (propriété
   `audio.view.version`) résolue depuis Maven Central — plus de dépôt explicite à déclarer. Le
-  composant étant en FXML, la démo apporte aussi le module `javafx-fxml`. La voie JitPack
-  (`com.github.IUTInfoAix-S201:audio-view`) reste disponible pour les versions antérieures à 1.10.1.
+  composant étant en FXML, la démo apporte aussi le module `javafx-fxml`.
 - **Insertion FXML** (`DemoView.fxml`) : `<AudioView fx:id="audioView"/>` après l'import
   `<?import fr.nedjar.vigiechiro.audio.AudioView?>`.
 - **Câblage** (`DemoController.java`) : `audioView.setAudioFile(...)` pour la source, écoute de
@@ -46,4 +45,4 @@ entre thème sombre et clair (démonstration de l'API `setLightTheme`).
 
 ## Pile technique
 
-Java 25, JavaFX 25 via `javafx-maven-plugin` (gère les natifs par OS), `audio-view` via JitPack.
+Java 25, JavaFX 25 via `javafx-maven-plugin` (gère les natifs par OS), `audio-view` depuis Maven Central.
