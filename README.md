@@ -1,7 +1,8 @@
 # VigieChiro Audio View - Démo
 
 Petite application JavaFX 25 qui **consomme le composant [`audio-view`](https://github.com/IUTInfoAix-S201/audio-view)**
-(sonogramme + spectrogramme) récupéré comme dépendance Maven via [JitPack](https://jitpack.io).
+(sonogramme + spectrogramme) récupéré comme dépendance Maven depuis
+[Maven Central](https://central.sonatype.com/artifact/fr.nedjar.vigiechiro/audio-view).
 
 Elle sert de démonstration et d'exemple d'intégration pour la SAE 2.01 : on insère le composant en
 FXML, on lui donne un fichier WAV, et on observe ses propriétés. Le calcul FFT, le rendu et la
@@ -13,7 +14,7 @@ lecture audio restent internes au composant (boîte noire).
 mvn javafx:run
 ```
 
-Au premier lancement, Maven télécharge `audio-view` depuis JitPack. Pour charger une séquence :
+Au premier lancement, Maven télécharge `audio-view` depuis Maven Central. Pour charger une séquence :
 
 - **glissez‑déposez un fichier WAV sur la fenêtre** (voie recommandée), ou
 - cliquez sur **« Ouvrir un fichier WAV... »**.
@@ -33,10 +34,10 @@ entre thème sombre et clair (démonstration de l'API `setLightTheme`).
 
 ## Comment l'intégration fonctionne
 
-- **Dépendance** (`pom.xml`) : dépôt `jitpack.io` + `com.github.IUTInfoAix-S201:audio-view:v1.3.0`
-  (propriété `audio.view.version`). Le `groupId` est imposé par JitPack (`com.github.<organisation>`),
-  l'`artifactId` est le nom du dépôt. Le composant étant en FXML, la démo apporte aussi le module
-  `javafx-fxml`.
+- **Dépendance** (`pom.xml`) : `fr.nedjar.vigiechiro:audio-view:1.10.1` (propriété
+  `audio.view.version`) résolue depuis Maven Central — plus de dépôt explicite à déclarer. Le
+  composant étant en FXML, la démo apporte aussi le module `javafx-fxml`. La voie JitPack
+  (`com.github.IUTInfoAix-S201:audio-view`) reste disponible pour les versions antérieures à 1.10.1.
 - **Insertion FXML** (`DemoView.fxml`) : `<AudioView fx:id="audioView"/>` après l'import
   `<?import fr.nedjar.vigiechiro.audio.AudioView?>`.
 - **Câblage** (`DemoController.java`) : `audioView.setAudioFile(...)` pour la source, écoute de
