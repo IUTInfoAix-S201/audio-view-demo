@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       # JDK Zulu 25 avec JavaFX embarqué : la démo consomme JavaFX en compile (sans
       # classifier) et se lance via javafx-maven-plugin ; un JDK fx suffit (pas de matrice,
