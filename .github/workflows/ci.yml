@@ -18,7 +18,7 @@ jobs:
       # classifier) et se lance via javafx-maven-plugin ; un JDK fx suffit (pas de matrice,
       # ce n'est pas une bibliothèque portable comme audio-view).
       - name: Configurer JDK 25 avec JavaFX (Zulu)
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v5.6.0
         with:
           java-version: '25'
           distribution: 'zulu'
