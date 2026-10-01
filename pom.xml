@@ -22,7 +22,7 @@
          par défaut en inferno (#34). -->
     <audio.view.version>1.13.1</audio.view.version>
 
-    <maven.compiler.plugin.version>3.15.0</maven.compiler.plugin.version>
+    <maven.compiler.plugin.version>3.16.0</maven.compiler.plugin.version>
     <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
 
     <!-- Outils qualité (alignés sur les TP R2.02 / R2.03 et sur la lib audio-view). -->
